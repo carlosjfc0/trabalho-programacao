@@ -1,4 +1,3 @@
 # trabalho-programacao
 
-Domínio de uma biblioteca com POO em Java. Abordando conceitos básicos de orientação a objeto: herança, construtores e classes. 
-Esse projeto visa facilitar a organização da interface de um possível cliente da biblioteca.
+Este trabalho consiste no desenvolvimento de um sistema simples de biblioteca em Java, utilizando os conceitos de Programação Orientada a Objetos. O sistema permite cadastrar autores, usuários, livros com capítulos, organizar livros em estantes e registrar empréstimos. A classe abstrata Pessoa é a base para Autor e Usuario, que implementam o método getDescricao(). Livros possuem título, autores e capítulos, enquanto estantes armazenam livros. A classe Emprestimo liga um usuário a um livro com data e status do empréstimo. A aplicação foi testada na classe Main, onde foram criados autores, usuários, livros, estantes e empréstimos. Por fim, o sistema exibe as informações no console, demonstrando o uso de herança, polimorfismo e encapsulamento.
