@@ -1,0 +1,179 @@
+
+public abstract class Pessoa {
+ protected String nome;
+ public Pessoa(String nome) {
+ this.nome = nome;
+ }
+ 
+ public abstract String getDescricao();
+ public String getNome() {
+ return nome;
+ }
+}
+public class Autor extends Pessoa {
+ public Autor(String nome) {
+ super(nome);
+ }
+ @Override
+ public String getDescricao() {
+ return "Autor: " + nome;
+ }
+}
+public class Usuario extends Pessoa {
+ private String matricula;
+ public Usuario(String nome, String matricula) {
+ super(nome);
+ this.matricula = matricula;
+ }
+ public String getMatricula() {
+ return matricula;
+ }
+ @Override
+ public String getDescricao() {
+ return "Usuário: " + nome + " - Matrícula: " + matricula;
+ }
+}
+public class Capitulo {
+ private int numero;
+ private String titulo;
+ public Capitulo(int numero, String titulo) {
+ this.numero = numero;
+ this.titulo = titulo;
+ }
+ public int getNumero() {
+ return numero;
+ }
+ public String getTitulo() {
+ return titulo;
+ }
+}
+import java.util.ArrayList;
+import java.util.List;
+public class Livro {
+ private String titulo;
+
+ private List<Autor> autores;
+
+ private List<Capitulo> capitulos;
+ public Livro(String titulo) {
+ this.titulo = titulo;
+ this.autores = new ArrayList<>();
+ this.capitulos = new ArrayList<>();
+ }
+ public String getTitulo() {
+ return titulo;
+ }
+ public List<Autor> getAutores() {
+ return autores;
+ }
+ public void adicionarAutor(Autor autor) {
+ autores.add(autor);
+ }
+ public void adicionarCapitulo(Capitulo capitulo) {
+ capitulos.add(capitulo);
+ }
+ public List<Capitulo> getCapitulos() {
+ return capitulos;
+ }
+ public String getDescricao() {
+ return "Livro: " + titulo + ", Autores: " + autores.size() + ",
+Capitulos: " + capitulos.size();
+ }
+}
+import java.util.ArrayList;
+import java.util.List;
+public class Estante {
+ private String codigo;
+
+ 
+ private List<Livro> livros;
+ public Estante(String codigo) {
+ this.codigo = codigo;
+ this.livros = new ArrayList<>();
+ }
+ public String getCodigo() {
+ return codigo;
+ }
+ public List<Livro> getLivros() {
+ return livros;
+ }
+ public void adicionarLivro(Livro livro) {
+ livros.add(livro);
+ }
+}
+import java.util.Date;
+public class Emprestimo {
+ private Usuario usuario;
+ private Livro livro;
+ private Date dataEmprestimo;
+ private String status;
+ public Emprestimo(Usuario usuario, Livro livro, Date
+dataEmprestimo, String status) {
+ this.usuario = usuario;
+ this.livro = livro;
+ this.dataEmprestimo = dataEmprestimo;
+ this.status = status;
+ }
+ public Usuario getUsuario() {
+ return usuario;
+ }
+ public Livro getLivro() {
+ return livro;
+ }
+ public Date getDataEmprestimo() {
+ return dataEmprestimo;
+ }
+ public String getStatus() {
+ return status;
+ }
+}
+import java.util.Date;
+public class Main {
+ public static void main(String[] args) {
+
+ 
+ Autor autor1 = new Autor("Machado de Assis");
+ Autor autor2 = new Autor("Clarice Lispector");
+
+ 
+ Livro livro1 = new Livro("Dom Casmurro");
+ livro1.adicionarAutor(autor1);
+ livro1.adicionarCapitulo(new Capitulo(1, "Introdução"));
+ livro1.adicionarCapitulo(new Capitulo(2, "Capítulo 2"));
+ Livro livro2 = new Livro("A Hora da Estrela");
+ livro2.adicionarAutor(autor2);
+ livro2.adicionarCapitulo(new Capitulo(1, "Primeiro Capítulo"));
+
+ 
+ Estante estante1 = new Estante("Estante A");
+ estante1.adicionarLivro(livro1);
+ estante1.adicionarLivro(livro2);
+
+ 
+ Usuario usuario1 = new Usuario("João Silva", "12345");
+ Usuario usuario2 = new Usuario("Maria Souza", "67890");
+
+ 
+ Emprestimo emp1 = new Emprestimo(usuario1, livro1, new Date(),
+"Em andamento");
+ Emprestimo emp2 = new Emprestimo(usuario2, livro2, new Date(),
+"Devolvido");
+
+ System.out.println(autor1.getDescricao());
+ System.out.println(usuario1.getDescricao());
+ System.out.println(livro1.getDescricao());
+ System.out.println(livro2.getDescricao());
+ System.out.println("Estante: " + estante1.getCodigo() + " tem
+livros:");
+ for (Livro l : estante1.getLivros()) {
+ System.out.println("- " + l.getTitulo());
+ }
+ System.out.println("Empréstimos:");
+ System.out.println(usuario1.getNome() + " pegou emprestado o
+livro: " + emp1.getLivro().getTitulo() + " Status: " +
+emp1.getStatus());
+ System.out.println(usuario2.getNome() + " pegou emprestado o
+livro: " + emp2.getLivro().getTitulo() + " Status: " +
+emp2.getStatus());
+ }
+}
